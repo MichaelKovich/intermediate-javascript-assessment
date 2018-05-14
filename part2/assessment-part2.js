@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // INTERMEDIATE JAVASCRIPT ASSESSMENT
 // PART 2
 
@@ -34,20 +36,17 @@
 // In the second .then function you use, assign the third user object
 // to the variable 'thirdUser' (previously declared) and then return the tenth user object.
 
-var firstUser = 'don\'t touch this string!';
-var thirdUser = 'don\'t touch this string, either!';
+var firstUser = "don't touch this string!";
+var thirdUser = "don't touch this string, either!";
 
 function noWeakLink() {
-
   return $http({
     method: 'GET',
-    url: '/api/users'
+    url: '/api/users',
   })
-  // CODE HERE...
-
+    .then(response => (firstUser = response.data[0])) // 1st user
+    .then(response => (thirdUser = response.data[9])); // 10th
 }
-
-
 
 // *************
 // * PROBLEM 2 *
@@ -66,16 +65,16 @@ function noWeakLink() {
 // When boundToElephant gets called, it should return this exact string:
 // 'My name is Horton and I am very heavy!' (The above instructions should make this work.  No code needed for this paragraph)
 
-var elephant = {
-  name: 'Horton'
-}
-function large() {
-
-  return 'My name is ' + this.name + ' and I am very heavy!'
-}
 // CODE HERE...
 
+var elephant = {
+  name: 'Horton',
+};
+function large() {
+  return 'My name is ' + this.name + ' and I am very heavy!';
+}
 
+const boundToElephant = large.bind(elephant);
 
 // *************
 // * PROBLEM 3 *
@@ -89,7 +88,9 @@ function large() {
 
 // CODE HERE...
 
-
+const deathStar = (capacity, crew) => {
+  return capacity.bind(crew);
+};
 
 // *************
 // * PROBLEM 4 *
@@ -104,7 +105,11 @@ function large() {
 
 // CODE HERE...
 
-
+const accountingOffice = assets => {
+  return function(liabilities) {
+    return liabilities + assets;
+  };
+};
 
 // *************
 // * PROBLEM 5 *
@@ -129,7 +134,18 @@ function large() {
 
 // CODE HERE...
 
+const forgetter = name => {
+  let arr = [];
 
+  return function rememberall(item) {
+    arr.push(item);
+
+    return {
+      name: name,
+      remember: arr,
+    };
+  };
+};
 
 // *************
 // * PROBLEM 6 *
@@ -156,3 +172,36 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+const frodo = (hun, dan) => {
+  let hunger = hun;
+  let danger = dan;
+
+  return {
+    dinnerOverFire: function() {
+      hunger -= 25;
+      danger += 40;
+
+      hunger > 100 ? (hunger = 100) : hunger < 0 ? (hunger = 0) : null;
+      danger > 100 ? (danger = 100) : danger < 0 ? (danger = 0) : null;
+
+      return {
+        hunger,
+        danger,
+      };
+    },
+
+    hidingInBush: function() {
+      hunger += 35;
+      danger -= 20;
+
+      hunger > 100 ? (hunger = 100) : hunger < 0 ? (hunger = 0) : null;
+      danger > 100 ? (danger = 100) : danger < 0 ? (danger = 0) : null;
+
+      return {
+        hunger,
+        danger,
+      };
+    },
+  };
+};

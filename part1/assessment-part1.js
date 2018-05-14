@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // INTERMEDIATE JAVASCRIPT ASSESSMENT
 // PART 1
 
@@ -7,33 +9,33 @@
 
 // Given the following nested functions:
 
-function daBears(){
-  var isFurry = true;
+function daBears() {
+  const isFurry = true;
 
-  function papaBear (){
-    var porridge = "Too Hot!";
-    var chair = "Too Big!";
-    var bed = "Too Hard!";
-    var feeling = "Angry";
+  function papaBear() {
+    const porridge = 'Too Hot!';
+    const chair = 'Too Big!';
+    const bed = 'Too Hard!';
+    const feeling = 'Angry';
 
-    function mamaBear(){
-      var porridge = "Too Cold!";
-      var bed = "Too Soft!";
+    function mamaBear() {
+      const porridge = 'Too Cold!';
+      const bed = 'Too Soft!';
 
-      function babyBear(){
-        var porridge = "Just right!";
-        var chair = "Just right!";
-        var bed = "Just right!";
-        var feeling = "Whiny";
-        var sleepy = "Very yes";
+      function babyBear() {
+        const porridge = 'Just right!';
+        const chair = 'Just right!';
+        const bed = 'Just right!';
+        const feeling = 'Whiny';
+        const sleepy = 'Very yes';
       }
     }
   }
 
-  function goldilocks(){
-    var feeling = "Hungry";
-    var isFurry = false;
-    var isDinner = true;
+  function goldilocks() {
+    const feeling = 'Hungry';
+    const isFurry = false;
+    const isDinner = true;
   }
 }
 
@@ -43,28 +45,27 @@ function daBears(){
 // Which function(s) access the "chair" variable and get "Too Big!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale1 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+const fairyTale1 = ['papaBear', 'mamaBear'];
 
 // Which function(s) access the "feeling" variable and get "Hungry"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale2 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+const fairyTale2 = ['goldilocks'];
 
 // Which function(s) access the "porridge" variable and get "Too Cold!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale3 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+const fairyTale3 = ['mamaBear'];
 
 // Which function(s) access the "sleepy" variable and get undefined
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale4 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+const fairyTale4 = ['daBears', 'papaBear', 'mamaBear', 'goldilocks'];
 
 // Which function(s) access the isFurry variable and get true
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
-
+const fairyTale5 = ['daBears', 'papaBear', 'mamaBear', 'babyBear'];
 
 // *************
 // * PROBLEM 2 *
@@ -83,16 +84,25 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // CODE HERE...
 
+function Vehicle() {
+  this.gasRemaining = 100;
+  this.drive = () => (this.gasRemaining -= 25);
+}
 
+Vehicle.prototype.drive = () => (this.gasRemaining -= 25);
 
+const mustang = new Vehicle();
+const charger = new Vehicle();
 
+charger.drive();
+mustang.drive();
+mustang.drive();
 
 // -----------------------------------------------------------------------------
 
 // *************
 // * PROBLEM 3 *
 // *************
-
 
 // For this problem, you will need to add a method to the String prototype named
 // "grammarPolice".  When called on a string, "grammarPolice" will return a new string
@@ -104,12 +114,17 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // Your method may be passed punctuation, numbers or other non-letter characters
 // and should neither modify them nor break when encountering them.
 
-
-
-
 // CODE HERE...
 
+String.prototype.grammarPolice = function() {
+  let arr = this.toLowerCase().split(' ');
 
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+  }
+
+  return arr.join(' ');
+};
 
 // *************
 // * PROBLEM 4 *
@@ -127,7 +142,15 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // CODE HERE...
 
-
+const valueType = (a, b) => {
+  if (a === b) {
+    return 'Exactly the same';
+  } else if (a == b) {
+    return 'Same value, different types';
+  } else {
+    return 'Different values';
+  }
+};
 
 // *************
 // * PROBLEM 5 *
@@ -138,6 +161,9 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // Your function will need to handle that promise.
 // When your promise receives its results, set variable 'theAnswer' (seen below) equal to the result.
 
-var theAnswer = "Unknown";
+var theAnswer = 'Unknown';
 
 // CODE HERE...
+
+const promiseCatcher = a =>
+  a.then(response => (theAnswer = response)).catch(err => console.log(err));
